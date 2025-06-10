@@ -1,0 +1,180 @@
+<!--
+  paypal_success.html
+  Plantilla HTML mostrada tras una compra exitosa en PayPal.
+  Muestra un mensaje de agradecimiento y confirmación al usuario.
+  Incluye animaciones visuales para mejorar la experiencia de usuario.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You for Shopping at AstroLeap!</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      min-height: 100vh;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle, #000323, #000a4d, #000323);
+      position: relative;
+    }
+
+    .rotating-galaxy {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      animation: rotateGalaxy 120s linear infinite;
+      background: url('https://images.unsplash.com/photo-1581320549383-3c8964b6ac5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1774&q=80') center center no-repeat;
+      background-size: cover;
+      filter: blur(5px);
+    }
+
+    @keyframes rotateGalaxy {
+      from { transform: rotateZ(0deg); }
+      to { transform: rotateZ(360deg); }
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) scale(1);
+        opacity: 0.8;
+      }
+      to {
+        transform: translateY(-10vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    .content-container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 30px;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .content-container:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #4CAF50;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .neon-border {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border: 2px solid #4CAF50;
+      border-radius: 25px;
+      box-shadow: 0 0 20px #4CAF50, 0 0 40px #4CAF50;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 20px #4CAF50, 0 0 40px #4CAF50; }
+      100% { box-shadow: 0 0 30px #4CAF50, 0 0 60px #4CAF50; }
+    }
+
+    @media (max-width: 600px) {
+      .content-container {
+        padding: 20px;
+        font-size: 90%;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="rotating-galaxy"></div>
+  <div class="particles" id="particles"></div>
+
+  <div class="content-container">
+    <h1>Thank You for Shopping at AstroLeap!</h1>
+    <p>Your payment was successful, and your order is being processed! We will send your purchase soon.</p>
+    <p> Please return to the game to claim your rewards.</p>
+    <p>Enjoy your journey among the stars!</p>
+    <div class="neon-border"></div>
+  </div>
+
+  <script>
+    const particlesContainer = document.getElementById('particles');
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+
+      // Random horizontal position
+      particle.style.left = Math.random() * 100 + 'vw';
+      // Random animation duration
+      const duration = Math.random() * 5 + 5; // between 5 and 10 seconds
+      particle.style.animationDuration = duration + 's';
+      // Random size
+      const size = Math.random() * 3 + 2; // between 2px and 5px
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+
+      particlesContainer.appendChild(particle);
+
+      // Remove particle after animation ends
+      setTimeout(() => {
+        particle.remove();
+      }, duration * 1000);
+    }
+
+    // Create particles every 200ms
+    setInterval(createParticle, 200);
+  </script>
+
+</body>
+</html>
